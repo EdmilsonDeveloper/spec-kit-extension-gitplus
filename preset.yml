@@ -1,0 +1,39 @@
+schema_version: "1.0"
+
+preset:
+  id: "git-typed-branch"
+  name: "Git Typed Branch"
+  version: "1.0.0"
+  description: "Feature branches as <author>/<type>/<number>-<slug> (change type inferred from the request); the spec directory mirrors the branch's <number>-<slug> segment so both share the same number."
+  author: "Edmilson Nascimento"
+  repository: "https://github.com/EdmilsonDeveloper/spec-kit-preset-git-typed-branch"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=1.0.0"
+  # Needs the git extension installed (it provides the branch script this preset wraps).
+  extensions:
+    - git
+
+provides:
+  templates:
+    # Thin command: it only infers the change type and calls scripts/*/typed-branch,
+    # which does the dry-run -> splice <type> -> real-run against the git extension.
+    - type: "command"
+      name: "speckit.git.feature"
+      file: "commands/speckit.git.feature.md"
+      description: "Create an <author>/<type>/<number>-<slug> feature branch (type inferred from the request)"
+      replaces: "speckit.git.feature"
+
+    # Pins the spec directory to the branch's final <number>-<slug> segment so
+    # branch and spec never diverge (critical under timestamp numbering).
+    - type: "command"
+      name: "speckit.specify"
+      file: "commands/speckit.specify.md"
+      description: "Spec directory mirrors the branch's <number>-<slug> segment"
+      strategy: "wrap"
+
+tags:
+  - "branching"
+  - "git"
+  - "conventional-commits"
