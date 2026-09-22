@@ -93,7 +93,7 @@ specify extension add --dev /path/to/gitplus
 specify extension disable git   # avoid duplicate branch/commit hooks
 
 # Or from a packaged release:
-specify extension add gitplus --from https://github.com/EdmilsonDeveloper/spec-kit-extension-gitplus/archive/refs/tags/1.0.0.zip
+specify extension add gitplus --from https://github.com/EdmilsonDeveloper/spec-kit-extension-gitplus/archive/refs/tags/v0.2.0.zip
 specify extension disable git
 ```
 
